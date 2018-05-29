@@ -2,16 +2,16 @@ import json
 import sensor_temperature
 from flask import Flask
 
-my_temp = sensor_temperature.temp
-my_time = sensor_temperature.timestamp
-
 app = Flask(__name__)
 
 @app.route('/')
 def get_temp():
+    my_datetime = sensor_temperature.get_datetime()
+    my_temperature = sensor_temperature.get_temperature()
+
     return json.dumps(
         {
-        'temp':str(my_temp),
-        'time':str(my_time)
+        'temperature':str(my_temperature),
+        'timestamp':str(my_datetime)
         }
     )
